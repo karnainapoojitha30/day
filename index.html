@@ -2,390 +2,223 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Reminder 🎂</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
 
 <style>
-/* 🌈 GLOBAL */
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+*{box-sizing:border-box;font-family:Segoe UI,sans-serif}
+
+body{
+margin:0;
+overflow:hidden;
+background:linear-gradient(135deg,#ff6ec4,#7873f5);
 }
 
-body {
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  transition: 0.4s;
+.slider{
+width:100vw;height:100vh;display:flex;transition:.6s ease;
 }
 
-body.dark {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: white;
+.slide{
+min-width:100vw;height:100vh;
+display:flex;flex-direction:column;
+justify-content:center;align-items:center;
+color:white;text-align:center;padding:20px;
 }
 
-/* 🎈 BALLOONS */
-.balloons span {
-  position: fixed;
-  bottom: -150px;
-  width: 60px;
-  height: 80px;
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: float 12s linear infinite;
+h1{font-size:3rem;animation:pulse 1s infinite alternate}
+p{font-size:1.4rem;max-width:520px}
+
+@keyframes pulse{to{transform:scale(1.08)}}
+
+/* buttons */
+.buttons{
+position:fixed;bottom:20px;width:100%;
+display:flex;justify-content:space-between;
+padding:0 20px;z-index:10;
 }
 
-.balloons span::after {
-  content: "";
-  position: absolute;
-  width: 2px;
-  height: 40px;
-  background: #555;
-  top: 80px;
-  left: 50%;
+button{
+background:white;border:none;
+padding:12px 22px;border-radius:30px;
+font-size:16px;cursor:pointer;
+box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
 
-.balloons span:nth-child(1) { left: 10%; background: #ff595e; animation-duration: 10s; }
-.balloons span:nth-child(2) { left: 25%; background: #ffca3a; animation-duration: 12s; }
-.balloons span:nth-child(3) { left: 40%; background: #8ac926; animation-duration: 9s; }
-.balloons span:nth-child(4) { left: 60%; background: #1982c4; animation-duration: 11s; }
-.balloons span:nth-child(5) { left: 80%; background: #6a4c93; animation-duration: 13s; }
-
-@keyframes float {
-  from { transform: translateY(0); }
-  to { transform: translateY(-120vh); }
+/* balloons */
+.balloon{
+position:absolute;width:40px;height:55px;
+border-radius:50%;
+animation:float linear infinite;opacity:.8;
 }
 
-/* 🎂 MAIN CARD */
-.container {
-  width: 420px;
-  max-width: 92%;
-  background: rgba(255,255,255,0.95);
-  padding: 40px;
-  border-radius: 22px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-  position: relative;
-  z-index: 1;
-  transition: 0.4s;
+@keyframes float{from{bottom:-80px}to{bottom:110%}}
+
+/* secret note */
+.secret-box{
+background:rgba(255,255,255,.2);
+padding:25px;border-radius:20px;
+font-size:1.4rem;max-width:420px;
+backdrop-filter:blur(6px);
+transition:.5s;
+}
+.secret-revealed{
+background:white;color:#ff3f81;
+transform:scale(1.05);
+}
+.reveal-btn{
+margin-top:20px;background:#ffea00;
+border:none;padding:12px 25px;
+border-radius:30px;font-size:16px;
+cursor:pointer;
 }
 
-body.dark .container {
-  background: rgba(30,30,30,0.95);
+/* cake */
+.cake{
+width:200px;height:120px;
+background:#ff9f43;border-radius:10px;
+position:relative;margin-top:30px;
 }
 
-/* HEADER */
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 15px;
-  margin-bottom: 25px;
-  border-bottom: 2px dashed rgba(0,0,0,0.15);
+.layer{
+width:100%;height:40px;
+background:#fff;position:absolute;bottom:40px;
 }
 
-body.dark .top {
-  border-color: rgba(255,255,255,0.25);
+.candle{
+width:10px;height:35px;background:red;
+position:absolute;top:-35px;left:50%;
+transform:translateX(-50%);
+cursor:pointer;
 }
 
-.top h1 {
-  margin: 0;
-  font-size: 1.5rem;
+.flame{
+width:14px;height:14px;
+background:yellow;border-radius:50%;
+position:absolute;top:-15px;left:-2px;
+animation:flicker .4s infinite alternate;
 }
 
-/* 🌙 BUTTON */
-.icon-btn {
-  border: none;
-  background: none;
-  font-size: 1.2rem;
-  cursor: pointer;
+@keyframes flicker{to{transform:scale(1.3)}}
+
+.smoke{
+width:20px;height:20px;border-radius:50%;
+background:rgba(255,255,255,.6);
+position:absolute;top:-20px;left:-5px;
+animation:smoke 2s forwards;
 }
 
-/* 📝 VERTICAL FORM */
-.vertical-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin-bottom: 25px;
+@keyframes smoke{
+to{transform:translateY(-60px);opacity:0}
 }
 
-.vertical-form label {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #555;
+/* responsive */
+@media(max-width:600px){
+h1{font-size:2rem}
+p{font-size:1.1rem}
+.cake{width:160px}
 }
-
-body.dark .vertical-form label {
-  color: #ccc;
-}
-
-.vertical-form input {
-  margin-top: 6px;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  font-size: 1rem;
-  background: #f2f2f2;
-}
-
-body.dark .vertical-form input {
-  background: #2a2a2a;
-  color: white;
-}
-
-/* ➕ ADD BUTTON */
-.vertical-form button {
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  background: linear-gradient(135deg, #ff595e, #ffca3a);
-  color: white;
-}
-
-.vertical-form button:hover {
-  opacity: 0.9;
-}
-
-/* 📋 LIST */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  margin-bottom: 14px;
-  padding: 14px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-  color: #333;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-}
-
-body.dark li {
-  background: linear-gradient(135deg, #434343, #000000);
-  color: #eee;
-}
-
-.today {
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-  100% { transform: scale(1); }
-}
-
-/* ❌ DELETE */
-.delete {
-  margin-top: 8px;
-  width: 100%;
-  padding: 8px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background: #ff595e;
-  color: white;
-}
-/* 📱 MOBILE (small phones) */
-@media (max-width: 480px) {
-
-  .container {
-    padding: 24px;
-    border-radius: 18px;
-  }
-
-  .top h1 {
-    font-size: 1.2rem;
-  }
-
-  .vertical-form input {
-    font-size: 0.95rem;
-    padding: 10px;
-  }
-
-  .vertical-form button {
-    font-size: 0.95rem;
-    padding: 12px;
-  }
-
-  li {
-    font-size: 0.9rem;
-    padding: 12px;
-  }
-
-  .delete {
-    padding: 6px;
-    font-size: 0.85rem;
-  }
-
-  .balloons span {
-    width: 45px;
-    height: 60px;
-  }
-}
-
-/* 📲 TABLETS */
-@media (max-width: 768px) {
-
-  .container {
-    width: 90%;
-  }
-
-  .top h1 {
-    font-size: 1.35rem;
-  }
-
-  .balloons span {
-    width: 50px;
-    height: 70px;
-  }
-}
-
-/* 💻 LARGE SCREENS */
-@media (min-width: 1200px) {
-
-  .container {
-  width: min(420px, 95%);
-
-  }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- 🎈 BALLOONS -->
-<div class="balloons">
-  <span></span><span></span><span></span><span></span><span></span>
+<div class="slider" id="slider">
+
+<!-- Slide 1 -->
+<div class="slide">
+<h1>🎉 Happy Birthday My Love ❤️</h1>
+<p>You make my world brighter every single day ✨</p>
 </div>
 
-<!-- 🎂 APP -->
-<div class="container">
-  <div class="top">
-    <h1>🎉 Birthday Reminder</h1>
-    <button class="icon-btn" onclick="toggleDark()">🌙</button>
-  </div>
+<!-- Slide 2 -->
+<div class="slide">
+<h1>💌 Secret Note</h1>
+<div class="secret-box" id="secretBox">
+Tap reveal to read my heart ❤️
+</div>
+<button class="reveal-btn" onclick="revealNote()">Reveal 💖</button>
+</div>
 
-  <form id="form" class="vertical-form">
-    <label>
-      Name
-      <input type="text" id="name" placeholder="Enter name" required>
-    </label>
+<!-- Slide 3 -->
+<div class="slide">
+<h1>🌈 My Wish</h1>
+<p>May joy, love and success follow you wherever you go 🎁</p>
+</div>
 
-    <label>
-      Date of Birth
-      <input type="date" id="date" required>
-    </label>
+<!-- Slide 4 Cake -->
+<div class="slide">
+<h1>🎂 Blow The Candle!</h1>
 
-    <button type="submit">➕ Add Birthday</button>
-  </form>
+<div class="cake">
+<div class="layer"></div>
+<div class="candle" onclick="blowCandle()">
+<div class="flame" id="flame"></div>
+</div>
+</div>
 
-  <ul id="list"></ul>
+<p>Tap the candle to make your wish 🕯️</p>
+</div>
+
+<!-- Slide 5 Conclusion -->
+<div class="slide">
+<h1>💖 Forever & Always</h1>
+<p>
+Today is special because YOU were born —  
+and my life became more beautiful because of it.
+You mean the world to me, CHITTI  
+No matter how many birthdays come,  
+I’ll always be here celebrating you, loving you, choosing you.  
+Happy Birthday, DIVAAA 🎂✨
+</p>
+</div>
+
+</div>
+
+<div class="buttons">
+<button onclick="prev()">⬅ Prev</button>
+<button onclick="next()">Next ➡</button>
 </div>
 
 <script>
-const form = document.getElementById("form");
-const list = document.getElementById("list");
-form.addEventListener("submit", e => {
-  e.preventDefault();
+let index=0;
+const slider=document.getElementById("slider");
 
-  birthdays.push({
-    name: nameInput.value,
-    date: dateInput.value
-  });
-
-  save();
-  render();
-  form.reset();
-});
-const name = document.getElementById("name");
-const date = document.getElementById("date");
-
-let birthdays = JSON.parse(localStorage.getItem("birthdays")) || [];
-
-/* 🌙 DARK MODE */
-function toggleDark() {
-  document.body.classList.toggle("dark");
-  localStorage.setItem("dark", document.body.classList.contains("dark"));
+function next(){
+if(index<4) index++;
+slider.style.transform=`translateX(-${index*100}vw)`;
+}
+function prev(){
+if(index>0) index--;
+slider.style.transform=`translateX(-${index*100}vw)`;
 }
 
-if (localStorage.getItem("dark") === "true") {
-  document.body.classList.add("dark");
+function revealNote(){
+let box=document.getElementById("secretBox");
+box.innerHTML="No matter where life takes us, my heart will always choose you 💖";
+box.classList.add("secret-revealed");
 }
 
-/* 💾 SAVE */
-function save() {
-  localStorage.setItem("birthdays", JSON.stringify(birthdays));
+function blowCandle(){
+let flame=document.getElementById("flame");
+if(!flame) return;
+
+flame.remove();
+
+let candle=document.querySelector(".candle");
+let smoke=document.createElement("div");
+smoke.className="smoke";
+candle.appendChild(smoke);
 }
 
-/* 🎂 AGE */
-function getAge(d) {
-  const b = new Date(d);
-  const t = new Date();
-  let age = t.getFullYear() - b.getFullYear();
-  if (t < new Date(t.getFullYear(), b.getMonth(), b.getDate())) age--;
-  return age;
+/* balloons */
+for(let i=0;i<25;i++){
+let b=document.createElement("div");
+b.className="balloon";
+b.style.left=Math.random()*100+"vw";
+b.style.background=`hsl(${Math.random()*360},80%,60%)`;
+b.style.animationDuration=4+Math.random()*6+"s";
+document.body.appendChild(b);
 }
-
-/* ⏳ COUNTDOWN */
-function countdown(d) {
-  const t = new Date();
-  let next = new Date(d);
-  next.setFullYear(t.getFullYear());
-  if (next < t) next.setFullYear(t.getFullYear() + 1);
-  return Math.ceil((next - t) / (1000 * 60 * 60 * 24));
-}
-
-/* 🎯 TODAY */
-function isToday(d) {
-  const t = new Date();
-  const b = new Date(d);
-  return t.getDate() === b.getDate() && t.getMonth() === b.getMonth();
-}
-
-/* 🖼 RENDER */
-function render() {
-  list.innerHTML = "";
-  birthdays.forEach((b, i) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <strong>${b.name}</strong><br>
-      🎂 Age: ${getAge(b.date)}<br>
-      ⏳ ${isToday(b.date) ? "Today 🎉" : countdown(b.date) + " days left"}
-      <button class="delete" onclick="remove(${i})">Delete</button>
-    `;
-    if (isToday(b.date)) li.classList.add("today");
-    list.appendChild(li);
-  });
-}
-
-/* ❌ DELETE */
-function remove(i) {
-  birthdays.splice(i, 1);
-  save();
-  render();
-}
-
-/* ➕ ADD */
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  birthdays.push({ name: name.value, date: date.value });
-  save();
-  render();
-  form.reset();
-});
-
-render();
 </script>
 
 </body>
