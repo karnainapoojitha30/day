@@ -15,49 +15,69 @@ background:linear-gradient(135deg,#ff6ec4,#7873f5);
 }
 
 .slider{
-width:100vw;height:100vh;display:flex;transition:.6s ease;
+display:flex;
+width:100%;
+height:100vh;
+transition:.6s ease;
 }
 
 .slide{
-min-width:100vw;height:100vh;
-display:flex;flex-direction:column;
-justify-content:center;align-items:center;
-color:white;text-align:center;padding:20px;
+flex:0 0 100%;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:16px;
+color:white;
+text-align:center;
 }
 
-h1{font-size:3rem;animation:pulse 1s infinite alternate}
-p{font-size:1.4rem;max-width:520px}
+/* text */
+h1{font-size:2.6rem;animation:pulse 1s infinite alternate}
+p{font-size:1.3rem;max-width:520px;line-height:1.5}
 
 @keyframes pulse{to{transform:scale(1.08)}}
 
-/* buttons */
+/* navigation */
 .buttons{
-position:fixed;bottom:20px;width:100%;
-display:flex;justify-content:space-between;
-padding:0 20px;z-index:10;
+position:fixed;
+bottom:15px;
+width:100%;
+display:flex;
+justify-content:space-between;
+padding:0 15px;
+z-index:10;
 }
 
 button{
 background:white;border:none;
-padding:12px 22px;border-radius:30px;
-font-size:16px;cursor:pointer;
-box-shadow:0 4px 10px rgba(0,0,0,.3);
+padding:12px 20px;
+border-radius:30px;
+font-size:16px;
+cursor:pointer;
 }
 
 /* balloons */
 .balloon{
-position:absolute;width:40px;height:55px;
+position:absolute;
+width:40px;height:55px;
 border-radius:50%;
-animation:float linear infinite;opacity:.8;
+animation:float linear infinite;
+opacity:.75;
 }
 
-@keyframes float{from{bottom:-80px}to{bottom:110%}}
+@keyframes float{
+from{bottom:-80px}
+to{bottom:110%}
+}
 
-/* secret note */
+/* secret */
 .secret-box{
 background:rgba(255,255,255,.2);
-padding:25px;border-radius:20px;
-font-size:1.4rem;max-width:420px;
+padding:22px;border-radius:18px;
+font-size:1.3rem;
+max-width:400px;
 backdrop-filter:blur(6px);
 transition:.5s;
 }
@@ -66,57 +86,75 @@ background:white;color:#ff3f81;
 transform:scale(1.05);
 }
 .reveal-btn{
-margin-top:20px;background:#ffea00;
-border:none;padding:12px 25px;
-border-radius:30px;font-size:16px;
-cursor:pointer;
+margin-top:18px;
+background:#ffea00;
+border:none;
+padding:12px 22px;
+border-radius:30px;
+font-size:15px;
+}
+
+/* photos */
+.memory-img{
+width:90%;
+max-width:320px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.4);
+animation:fadeIn 1s ease;
+}
+@keyframes fadeIn{
+from{opacity:0;transform:scale(.8)}
+to{opacity:1;transform:scale(1)}
 }
 
 /* cake */
 .cake{
-width:200px;height:120px;
-background:#ff9f43;border-radius:10px;
-position:relative;margin-top:30px;
+width:180px;height:110px;
+background:#ff9f43;
+border-radius:10px;
+position:relative;
+margin-top:25px;
 }
-
 .layer{
-width:100%;height:40px;
-background:#fff;position:absolute;bottom:40px;
+width:100%;height:38px;
+background:white;
+position:absolute;bottom:38px;
 }
-
 .candle{
-width:10px;height:35px;background:red;
-position:absolute;top:-35px;left:50%;
+width:10px;height:32px;
+background:red;
+position:absolute;
+top:-32px;left:50%;
 transform:translateX(-50%);
 cursor:pointer;
 }
-
 .flame{
 width:14px;height:14px;
 background:yellow;border-radius:50%;
-position:absolute;top:-15px;left:-2px;
+position:absolute;top:-14px;left:-2px;
 animation:flicker .4s infinite alternate;
 }
-
 @keyframes flicker{to{transform:scale(1.3)}}
-
 .smoke{
-width:20px;height:20px;border-radius:50%;
+width:20px;height:20px;
 background:rgba(255,255,255,.6);
-position:absolute;top:-20px;left:-5px;
+border-radius:50%;
+position:absolute;
+top:-18px;left:-5px;
 animation:smoke 2s forwards;
 }
-
 @keyframes smoke{
 to{transform:translateY(-60px);opacity:0}
 }
 
-/* responsive */
+/* mobile */
 @media(max-width:600px){
-h1{font-size:2rem}
-p{font-size:1.1rem}
-.cake{width:160px}
+h1{font-size:1.9rem}
+p{font-size:1.05rem}
 }
+
+/* prevent selection */
+img,button{user-select:none}
 </style>
 </head>
 
@@ -124,13 +162,11 @@ p{font-size:1.1rem}
 
 <div class="slider" id="slider">
 
-<!-- Slide 1 -->
 <div class="slide">
 <h1>🎉 Happy Birthday My Love ❤️</h1>
-<p>You make my world brighter every single day ✨</p>
+<p>You make my life brighter every single day ✨</p>
 </div>
 
-<!-- Slide 2 -->
 <div class="slide">
 <h1>💌 Secret Note</h1>
 <div class="secret-box" id="secretBox">
@@ -139,79 +175,91 @@ Tap reveal to read my heart ❤️
 <button class="reveal-btn" onclick="revealNote()">Reveal 💖</button>
 </div>
 
-<!-- Slide 3 -->
 <div class="slide">
-<h1>🌈 My Wish</h1>
-<p>May joy, love and success follow you wherever you go 🎁</p>
+<h1>📸 Our Memory</h1>
+<img src="img1.jpeg" class="memory-img">
+<p>My favorite moment with you ❤️</p>
 </div>
 
-<!-- Slide 4 Cake -->
 <div class="slide">
-<h1>🎂 Blow The Candle!</h1>
+<h1>🌅 Another Beautiful Day</h1>
+<img src="img2.jpeg" class="memory-img">
+<p>Forever grateful for you 💕</p>
+</div>
 
+<div class="slide">
+<h1>🎂 Make A Wish!</h1>
 <div class="cake">
 <div class="layer"></div>
 <div class="candle" onclick="blowCandle()">
 <div class="flame" id="flame"></div>
 </div>
 </div>
-
-<p>Tap the candle to make your wish 🕯️</p>
+<p>Tap the candle 🎈</p>
 </div>
 
-<!-- Slide 5 Conclusion -->
 <div class="slide">
 <h1>💖 Forever & Always</h1>
 <p>
-Today is special because YOU were born —  
-and my life became more beautiful because of it.
-You mean the world to me, CHITTI  
-No matter how many birthdays come,  
-I’ll always be here celebrating you, loving you, choosing you.  
-Happy Birthday, DIVAAA 🎂✨
+Today you were born — and my world became brighter.  
+Thank you for being my happiness, my peace, my love.
+you are my everything, and I wish you the happiest birthday ever.
+You mean a lot to me...  
+Happy Birthday DIVAAA🎂✨
 </p>
 </div>
 
 </div>
 
 <div class="buttons">
-<button onclick="prev()">⬅ Prev</button>
-<button onclick="next()">Next ➡</button>
+<button onclick="prev()">⬅</button>
+<button onclick="next()">➡</button>
 </div>
 
 <script>
 let index=0;
 const slider=document.getElementById("slider");
 
+function update(){
+slider.style.transform=`translateX(-${index*100}%)`;
+}
+
 function next(){
-if(index<4) index++;
-slider.style.transform=`translateX(-${index*100}vw)`;
+if(index<slider.children.length-1){index++;update();}
 }
 function prev(){
-if(index>0) index--;
-slider.style.transform=`translateX(-${index*100}vw)`;
+if(index>0){index--;update();}
 }
 
 function revealNote(){
-let box=document.getElementById("secretBox");
-box.innerHTML="No matter where life takes us, my heart will always choose you 💖";
+const box=document.getElementById("secretBox");
+box.innerHTML="No matter where life goes, my heart always belongs to you 💖";
 box.classList.add("secret-revealed");
 }
 
 function blowCandle(){
-let flame=document.getElementById("flame");
+const flame=document.getElementById("flame");
 if(!flame) return;
-
 flame.remove();
-
-let candle=document.querySelector(".candle");
-let smoke=document.createElement("div");
+const candle=document.querySelector(".candle");
+const smoke=document.createElement("div");
 smoke.className="smoke";
 candle.appendChild(smoke);
 }
 
+/* swipe */
+let startX=0;
+document.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+document.addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50) next();
+if(endX-startX>50) prev();
+});
+
 /* balloons */
-for(let i=0;i<25;i++){
+for(let i=0;i<22;i++){
 let b=document.createElement("div");
 b.className="balloon";
 b.style.left=Math.random()*100+"vw";
